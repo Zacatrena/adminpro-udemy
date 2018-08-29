@@ -14,6 +14,7 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 // Temporal
 import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
 import { GraficoDonutComponent } from '../components/grafico-donut/grafico-donut.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { GraficoDonutComponent } from '../components/grafico-donut/grafico-donut
     ProgressComponent,
     Graficas1Component,
     IncrementadorComponent,
-    GraficoDonutComponent
+    GraficoDonutComponent,
+    AccountSettingsComponent
   ],
   exports: [
     DashboardComponent,
