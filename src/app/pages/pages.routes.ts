@@ -8,6 +8,7 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { LoginGuardGuard } from '../services/service.index';
+import { ProfileComponent } from './profile/profile.component';
 
 const pagesRoutes: Routes = [
   {
@@ -22,6 +23,7 @@ const pagesRoutes: Routes = [
       { path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJs', description: 'Prácticas con observer' } },
       // tslint:disable-next-line:max-line-length
       { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes del Tema', description: 'Asignar Tema al site' } },
+      { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de usuario' } },
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
     ]
   },
