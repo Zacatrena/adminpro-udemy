@@ -17,7 +17,6 @@ export class ImagenPipe implements PipeTransform {
     }
 
     if (img.indexOf('https') >= 0 ) {
-      console.log(img);
       return img;
     }
 

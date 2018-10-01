@@ -9,6 +9,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromesasComponent } from './promesas/promesas.component';
 import { LoginGuardGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 const pagesRoutes: Routes = [
   {
@@ -24,6 +25,11 @@ const pagesRoutes: Routes = [
       // tslint:disable-next-line:max-line-length
       { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes del Tema', description: 'Asignar Tema al site' } },
       { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de usuario' } },
+      // Mantenimientos
+      { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento Usuarios' } },
+      // { path: 'medicos', component: UsuariosComponent, data: { titulo: 'Mantenimiento Médicos' } },
+      // { path: 'hospitales', component: UsuariosComponent, data: { titulo: 'Mantenimiento Hospitales' } },
+
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
     ]
   },

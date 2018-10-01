@@ -24,7 +24,7 @@ export class UsuarioService {
   }
 
   estaLogueado() {
-    console.log('this.token.length: ', this.token.length);
+    // console.log('this.token.length: ', this.token.length);
 
     return (this.token.length > 5) ? true : false;
   }
@@ -104,19 +104,22 @@ export class UsuarioService {
     url += '?token=' + this.token;
 
     return this.http.put(url, usuario)
-                      .pipe(map((resp: any) => {
+                .pipe(map((resp: any) => {
 
-                        // tslint:disable-next-line:prefer-const
-                        let usuarioDB = resp.usuario;
-                        this.guardarLocalStorage(usuarioDB._id, this.token, usuarioDB);
-                        swal('Usuario actualizado', usuario.nombre, 'success');
+                  // Si es el usuario actual-logueado
+                  if (usuario === this.usuario) {
+                    // tslint:disable-next-line:prefer-const
+                    let usuarioDB = resp.usuario;
+                    this.guardarLocalStorage(usuarioDB._id, this.token, usuarioDB);
+                  }
 
-                        return true;
-                      }));
+                  swal('Usuario actualizado', usuario.nombre, 'success');
+
+                  return true;
+                }));
   }
 
   cambiarImagen( archivo: File, id: string ) {
-    console.log('PPPPP');
 
     this._subirArchivoService.subirArchivo(archivo, 'usuarios', id)
           .then( (resp: any) => {
@@ -129,6 +132,30 @@ export class UsuarioService {
 
           });
 
+  }
+
+  cargarUsuarios( desde: number = 0 ) {
+    // tslint:disable-next-line:prefer-const
+    let url = URL_SERVICES + '/usuario?desde=' + desde;
+
+    return this.http.get(url);
+  }
+
+  buscarUsuario( termino: string ) {
+    // tslint:disable-next-line:prefer-const
+    let url = URL_SERVICES + '/busqueda/coleccion/usuarios/' + termino;
+    return this.http.get(url).pipe(map((resp: any) => resp.usuarios));
+  }
+
+  borrarUsuario(id: string) {
+    let url = URL_SERVICES + '/usuario/' + id;
+    url += '?token=' + this.token;
+
+    return this.http.delete(url)
+                      .pipe(map((resp: any) => {
+                        swal('Usuario borrado', 'El usuario ha sido eliminado correctamente', 'success');
+                        return true;
+                      }));
   }
 
 }

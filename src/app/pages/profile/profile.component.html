@@ -7,7 +7,7 @@
 
                 <form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f.value)" class="form p-t-20">
                     <div class="form-group">
-                        <label for="exampleInputuname">Nombre usuario</label>
+                        <label for="exampleInputuname">{{usuario.nombre}}</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-user"></i></div>
                             <input type="text" [(ngModel)]="usuario.nombre" name="nombre" class="form-control" placeholder="Nombre usuario" required>
@@ -34,7 +34,7 @@
         <div class="card">
             <div class="card-body" align="center">
                 <h4 class="card-title">Foto usuario</h4>
-                <h6 class="card-subtitle">Nombre usuario</h6>
+                <h6 class="card-subtitle">{{usuario.nombre}}</h6>
 
                 <img *ngIf="!imagenTemp" [src]="usuario.img | imagen" class="w150">
                 <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
