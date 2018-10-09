@@ -7,12 +7,16 @@ import { ProgressComponent } from './progress/progress.component';
 import { Graficas1Component } from './graficas1/graficas1.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
-import { LoginGuardGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { HospitalesComponent } from './hospitales/hospitales.component';
 import { MedicoComponent } from './medicos/medico.component';
 import { MedicosComponent } from './medicos/medicos.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
+
+// Guards
+import { LoginGuardGuard } from '../services/service.index';
+import { AdminGuard } from '../services/service.index';
 
 const pagesRoutes: Routes = [
   {
@@ -28,8 +32,14 @@ const pagesRoutes: Routes = [
       // tslint:disable-next-line:max-line-length
       { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes del Tema', description: 'Asignar Tema al site' } },
       { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de usuario' } },
+      { path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Buscador' } },
       // Mantenimientos
-      { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento Usuarios' } },
+      {
+        path: 'usuarios',
+        component: UsuariosComponent,
+        canActivate: [ AdminGuard ],
+        data: { titulo: 'Mantenimiento Usuarios' }
+      },
       { path: 'medicos', component: MedicosComponent, data: { titulo: 'Mantenimiento Médicos' } },
       { path: 'medico/:id', component: MedicoComponent, data: { titulo: 'Actualizar Médico' } },
       { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Mantenimiento Hospitales' } },
