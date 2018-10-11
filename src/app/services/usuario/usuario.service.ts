@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 
@@ -23,6 +24,25 @@ export class UsuarioService {
     public _subirArchivoService: SubirArchivoService
   ) {
     this.cargarLocalStorage();
+  }
+
+  renuevaToken() {
+    let url = URL_SERVICES + '/login/renuevatoken';
+    url += '?token=' + this.token;
+
+    return this.http.get(url)
+                      .pipe(map( (resp: any) => {
+                        this.token = resp.token;
+                        localStorage.setItem('token', this.token);
+                        console.log('token renovado');
+
+                        return true;
+                      }),
+                      catchError( err => {
+                        this.router.navigate(['/login']);
+                        swal('no se pudo renovar token', 'No fue posible renovar token', 'error');
+                        return throwError(err);
+                      }));
   }
 
   estaLogueado() {
@@ -151,7 +171,7 @@ export class UsuarioService {
             this.guardarLocalStorage(id, this.token, this.usuario, this.menu);
           })
           .catch( () => {
-              // console.log( resp);
+              // console.log( resp.errors);
             });
 
   }
